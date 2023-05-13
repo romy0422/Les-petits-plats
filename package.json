@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "sass": "^1.62.1"
+  },
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1"
+  },
+  "scripts": {
+    "sass": "sass --watch ./sass/style.scss:./style/style.css --style expanded"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "les petits plats",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romy0422/Les-petits-plats.git"
+  },
+  "bugs": {
+    "url": "https://github.com/romy0422/Les-petits-plats/issues"
+  },
+  "homepage": "https://github.com/romy0422/Les-petits-plats#readme"
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible"
+            content="IE=edge">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="style/style.css">
+            <script src="https://kit.fontawesome.com/daa790b88e.js" crossorigin="anonymous"></script>
+        <title>Les petits plats</title>
+    </head>
+    <body>
+        <header><img src="./element/logo.png"
+                class="logo"
+                alt="les petits plats">
+            <img src="./element/les-petits-plats.png"
+                class="logo"
+                alt="les petits plats">
+        </header>
+        <main>
+            <div class="searchbar"><input id="global-searchbar"
+                    class="searchbar-Input"
+                    type="search"
+                    placeholder="Rechercher une recette"><button id="buttonSearch"
+                    class="fa-solid fa-magnifying-glass fa-lg col-1"></button></div>
+            <div class="tag-selected"></div>
+            <div class="tags-list">
+                <div class="tags-ingredients tags-all">
+                    <div class="input-icone-group"><input id="input-ingredients"
+                            class="input-tags"
+                            placeholder="Ingredients"><i id="ingredient-angle"
+                            class="fa-solid fa-angle-down fa-xl angle-position"></i>
+                    </div>
+                    <div class="list-tag list-tag_ingredient--color"></div>
+                </div>
+                <div class="tags-appliances tags-all">
+                    <div class="input-icone-group"><input id="input-appliances"
+                            class="input-tags"
+                            placeholder="Appareils"><i id="appliance-angle"
+                            class="fa-solid fa-angle-down fa-xl angle-position"></i>
+                    </div>
+                    <div class="list-tag list-tag_appliances--color"></div>
+                </div>
+                <div class="tags-ustensils tags-all">
+                    <div class="input-icone-group"><input id="input-ustensils"
+                            class="input-tags"
+                            placeholder="Ustensiles"><i id="ustensil-angle"
+                            class="fa-solid fa-angle-down fa-xl angle-position"></i>
+                    </div>
+                    <div class="list-tag list-tag_ustensils--color"></div>
+                </div>
+            </div>
+            <div class="all-recipes"></div>
+        </main>
+        <script src="./scriptjs/index.js"
+            type="module"></script>
+    </body>
+
+</html>
