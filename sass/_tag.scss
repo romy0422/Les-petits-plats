@@ -1,0 +1,155 @@
+.list-tag {
+    
+  margin-top: 20px;
+  display: grid;
+  width: auto;
+  grid-template-columns: auto auto auto;
+  justify-content: start;
+  gap: 2px;
+  grid-auto-rows: auto;
+}
+
+.element-list {
+    color: white;
+    margin: 2px 2px 2px 2px;
+
+}
+
+.input-icone-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tags-all{
+    position: relative;
+    z-index: 2;
+    padding:12px;
+    border-radius: 5px;
+    height:fit-content;
+}
+
+.list-appliances{
+    height:auto;
+}
+.list-ingredients{
+    height:auto;
+}
+.list-ustensils{
+    height:auto;
+}
+
+
+.tags-list{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: start;
+    width: 90%;
+    height: 60px;
+    margin:auto auto 40px auto;
+    gap:20px;
+}
+.tags-ingredients{
+    grid-auto-rows: auto;
+    background-color: #3282F7;
+}
+#input-ingredients{
+}
+#input-appliances{
+}
+#input-ustensils{
+}
+.input-icone-group{
+
+}
+.input-tags{
+
+}
+.angle-position{
+
+}
+.list-tag{
+
+} 
+.list-tag_ingredient--color{
+    height:auto;
+
+}
+
+.tags-appliances{
+    grid-auto-rows: auto;
+    background-color: #68D9A4;
+
+
+}
+
+.input-appliances{
+
+}
+
+.appliance-angle{
+
+}
+.angle-position{
+color:white;
+}
+.list-tag_appliances--color{
+    height:auto;
+
+
+}
+.tags-ustensils{
+    grid-auto-rows: auto;
+    background-color: #ED6454;
+}
+
+.input-ustensils{
+
+}
+.input-tags{
+ background-color: transparent;
+ outline: none;
+ border:none;
+ color:white;
+
+}
+.input-tags::placeholder{
+    font-size: 20px;
+    opacity:1;
+    color:white;
+}
+.list-tag_ustensils--color{
+height:auto;
+}
+
+.list-ingredient{
+    background-color: #3282F7;
+    width:fit-content;
+    color: white;
+    padding:5px;
+    border-radius: 5px;
+}
+.list-appliance{
+    background-color: #68D9A4;
+    width:fit-content;
+    color: white;
+    padding:5px;    
+    border-radius: 5px;
+
+
+}
+.list-ustensil{
+    background-color: #ED6454;
+    width:fit-content;
+    color: white;
+    padding:5px;
+    border-radius: 5px;
+
+}
+
+#tag-selected{
+    display:flex;
+    justify-content: flex-start;
+    gap:10px;
+    margin: 10px 0 50px 100px;
+}

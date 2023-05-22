@@ -11,13 +11,21 @@ margin:auto;
     width: 100%;
     margin:20px 0 0 0;
 }
+
+.recipe__hidden{
+    display:none;
+}
+
 .head__time-preparation{
 display: grid;
 grid-template-columns: auto auto;
 justify-content: space-between;
 align-items: center;
 }
-.time-preparation{}
+.time-preparation{
+    font-size: 22px;
+    font-weight: bold;
+}
 
 .recipe__description{
 display: grid;

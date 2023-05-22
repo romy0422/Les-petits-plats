@@ -16,7 +16,7 @@ export function RecipeBuild (id, name, ingredients, time, description) {
     iconeTime.setAttribute('class', 'fa-regular fa-clock')
     timeRecipe.setAttribute('class', 'time-preparation')
     bodyRecipe.setAttribute('class', 'recipe__description')
-    recipes.setAttribute('id', id)
+    recipes.setAttribute('id', `i-${id}`)
     recipes.setAttribute('class', 'recipe__article')
     recipesImgContain.setAttribute('class', 'recipe__image')
     descriptionRecipes.setAttribute('class', 'recipe__detail')
