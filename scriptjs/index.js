@@ -1,7 +1,7 @@
 import { RecipeBuild } from './recipe.js'
 import { recipes } from './data/recipes.js'
 import { removeMultiple } from './utils.js'
-import { searchRecipes, searchRecipesTags } from './search.js'
+import { searchRecipes, searchRecipesTags, tagIdRecipeValidate } from './search.js'
 
 let arrayRecipesToFilter = []
 let arrayListIngredient = []
@@ -18,10 +18,15 @@ function interaction () {
   const globalSearch = document.querySelector('#global-searchbar')
   globalSearch.addEventListener('input', (e) => {
     const wordKey = e.target.value
-    if (wordKey.length > 3 || wordKey.length === 0) {
+    if (wordKey.length > 3) {
       arrayRecipesToFilter = searchRecipes(wordKey, recipes)
       searchRecipesTags(arrayRecipesToFilter)
-      displayRecipes()
+      displayRecipes(tagIdRecipeValidate)
+      displayListTag()
+    } else {
+      arrayRecipesToFilter = searchRecipes('', recipes)
+      searchRecipesTags(arrayRecipesToFilter)
+      displayRecipes(tagIdRecipeValidate)
       displayListTag()
     }
   })
@@ -31,15 +36,15 @@ function interaction () {
     if (e.target.classList.contains('list-ingredient') && tagSelected.querySelector(`#${e.target.id}`) === null) {
       const targetTag = e.target.id
       const targetTagTextContent = e.target.textContent
-      tagSelected.innerHTML += `<div class = 'list-ingredient element-list' id=${targetTag}>${targetTagTextContent}</div>`
+      tagSelected.innerHTML += `<div class = 'list-ingredient element-list fa-regular fa-circle-xmark fa-lg' id="${targetTag}"><p>${targetTagTextContent}</p></div>`
     } else if (e.target.classList.contains('list-appliance') && tagSelected.querySelector(`#${e.target.id}`) === null) {
       const targetTag = e.target.id
       const targetTagTextContent = e.target.textContent
-      tagSelected.innerHTML += `<div class = 'list-appliance element-list' id=${targetTag}>${targetTagTextContent}</div>`
+      tagSelected.innerHTML += `<div class = 'list-appliance element-list fa-regular fa-circle-xmark fa-lg' id="${targetTag}"><p>${targetTagTextContent}</p></div>`
     } else if (e.target.classList.contains('list-ustensil') && tagSelected.querySelector(`#${e.target.id}`) === null) {
       const targetTag = e.target.id
       const targetTagTextContent = e.target.textContent
-      tagSelected.innerHTML += `<div class = 'list-ustensil element-list' id=${targetTag}>${targetTagTextContent}</div>`
+      tagSelected.innerHTML += `<div class = 'list-ustensil element-list fa-regular fa-circle-xmark fa-lg' id="${targetTag}"><p>${targetTagTextContent}</p></div>`
     } else if (e.target.classList.contains('list-ingredient') && tagSelected.querySelector(`#${e.target.id}`) !== null) {
       tagSelected.removeChild(document.querySelector(`#${e.target.id}`))
     } else if (e.target.classList.contains('list-appliance') && tagSelected.querySelector(`#${e.target.id}`) !== null) {
@@ -51,6 +56,12 @@ function interaction () {
 }
 document.addEventListener('mouseup', () => {
   searchRecipesTags(arrayRecipesToFilter)
+  const globalSearch = document.querySelector('#global-searchbar')
+  const wordKey = globalSearch.value
+  arrayRecipesToFilter = searchRecipes(wordKey, recipes)
+  searchRecipesTags(arrayRecipesToFilter)
+  displayRecipes(tagIdRecipeValidate)
+  displayListTag()
 })
 
 interaction()
@@ -61,6 +72,7 @@ function displayRecipes () {
   arrayListIngredient = []
   arrayListAppliance = []
   arrayListUstensil = []
+
   arrayRecipesToFilter.forEach((recipe) => {
     const recipeDisplay = RecipeBuild(recipe.id, recipe.name, recipe.ingredients, recipe.time, recipe.description).recipeBuildDiv()
     recipe.ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
@@ -68,6 +80,17 @@ function displayRecipes () {
     arrayListUstensil.push(...recipe.ustensils)
     allRecipes.appendChild(recipeDisplay)
   })
+
+  if (tagIdRecipeValidate.length > 0) {
+    const arrayRecipeTagId = arrayRecipesToFilter.filter((recipe) => tagIdRecipeValidate.includes(recipe.id))
+    arrayRecipeTagId.forEach((recipe) => {
+      recipe.ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
+      arrayListAppliance.push(recipe.appliance)
+      arrayListUstensil.push(...recipe.ustensils)
+    }
+    )
+  }
+
   arrayListIngredient = removeMultiple(arrayListIngredient)
   arrayListAppliance = removeMultiple(arrayListAppliance)
   arrayListUstensil = removeMultiple(arrayListUstensil)

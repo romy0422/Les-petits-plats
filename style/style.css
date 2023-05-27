@@ -131,6 +131,16 @@ header {
 .element-list {
   color: white;
   margin: 2px 2px 2px 2px;
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-direction: row-reverse !important;
+  align-items: center !important;
+  padding: 0 20px 0 0 !important;
+  border-radius: 5px;
+}
+
+.element-list p {
+  margin: 20px;
 }
 
 .input-icone-group {

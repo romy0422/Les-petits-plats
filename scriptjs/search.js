@@ -1,3 +1,4 @@
+export const tagIdRecipeValidate = []
 
 export function searchRecipes (wordKeys, recipesArray) {
   console.log(recipesArray)
@@ -30,4 +31,5 @@ export function searchRecipesTags (recipesArray) {
       document.querySelector(`#i-${recipe.id}`).className = 'recipe__article'
     })
   }
+  return tagIdRecipeValidate
 }
