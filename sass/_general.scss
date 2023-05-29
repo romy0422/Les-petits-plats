@@ -4,6 +4,7 @@
 
 .logo{
 margin:auto;
+width: 400px;
 }
 header{
     display:flex;
@@ -11,6 +12,7 @@ header{
     margin:auto auto 20px auto;
 }
 .searchbar{
+  display:flex;
 width:89%;
 height: 40px;
 text-align: center;
@@ -33,9 +35,17 @@ width:90%;
 outline:none;
 border:none;
 background-color: transparent;
-padding-top: 15px;
 font-weight: bold;
+font-family: "Lato", sans-serif;
+font-weight: 400;
+font-size: 20px;
 }
+.searchbar-Input ::placeholder{
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
 .tag-selected{
 width:90%;
 }

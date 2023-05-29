@@ -4,6 +4,7 @@
 
 .logo {
   margin: auto;
+  width: 400px;
 }
 
 header {
@@ -13,6 +14,7 @@ header {
 }
 
 .searchbar {
+  display: flex;
   width: 89%;
   height: 40px;
   text-align: center;
@@ -34,8 +36,16 @@ header {
   outline: none;
   border: none;
   background-color: transparent;
-  padding-top: 15px;
   font-weight: bold;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.searchbar-Input ::placeholder {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .tag-selected {
@@ -68,6 +78,7 @@ header {
 }
 
 .time-preparation {
+  padding-left: 5px;
   font-size: 22px;
   font-weight: bold;
 }
@@ -76,7 +87,7 @@ header {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
 }
 
 .recipe__image {
@@ -116,16 +127,31 @@ header {
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
+  font-family: "roboto";
+  font-weight: 400;
+}
+
+.ingredient {
+  font-weight: 700;
+}
+
+.container-ingredient {
+  font-family: "Lato", sans-serif;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 18.2px;
 }
 
 .list-tag {
-  margin-top: 20px;
   display: grid;
   width: auto;
   grid-template-columns: auto auto auto;
   justify-content: start;
   gap: 2px;
   grid-auto-rows: auto;
+  height: auto;
 }
 
 .element-list {
@@ -182,6 +208,11 @@ header {
 .tags-ingredients {
   grid-auto-rows: auto;
   background-color: #3282F7;
+}
+
+.input-tags {
+  height: 50px;
+  width: 130px;
 }
 
 .list-tag_ingredient--color {
@@ -251,7 +282,7 @@ header {
   display: flex;
   justify-content: flex-start;
   gap: 10px;
-  margin: 10px 0 50px 100px;
+  margin: 10px 0 10px 95px;
 }
 
 /*# sourceMappingURL=style.css.map */

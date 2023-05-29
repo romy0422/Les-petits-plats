@@ -1,6 +1,6 @@
 import { RecipeBuild } from './recipe.js'
 import { recipes } from './data/recipes.js'
-import { removeMultiple } from './utils.js'
+import { removeMultiple, styleInput } from './utils.js'
 import { searchRecipes, searchRecipesTags, listTag } from './search.js'
 
 export let arrayRecipesToFilter = []
@@ -36,7 +36,6 @@ function interaction () {
     }
   })
   document.addEventListener('mousedown', (e) => {
-    console.log(e.target.classList)
     if (e.target.classList.contains('list-ingredient') && tagSelected.querySelector(`#${e.target.id}`) === null) {
       const targetTag = e.target.id
       const targetTagTextContent = e.target.textContent
@@ -71,6 +70,13 @@ function interaction () {
       const wordKey = globalSearch.value
       arrayRecipesToFilter = searchRecipes(wordKey, recipes)
       displayRecipes()
+
+      const inputIngredients = document.querySelector('#input-ingredients')
+      const inputAppliances = document.querySelector('#input-appliances')
+      const inputUstensils = document.querySelector('#input-ustensils')
+      styleInput('ingredients', inputIngredients, 'close')
+      styleInput('appliance', inputAppliances, 'close')
+      styleInput('ustensils', inputUstensils, 'close')
     }
   })
 }
@@ -140,42 +146,55 @@ function displayListTag () {
   displayIngredientsButton.addEventListener('click', () => {
     if (!clickDoubleI) {
       clickDoubleI = true
+      displayIngredientsButton.className = 'fa-solid fa-angle-up fa-xl angle-position'
+      styleInput('ingredients', inputIngredients, 'open')
       const wordKey = inputIngredients.value
       const arrayListIngredientUp = listTag(wordKey, arrayListIngredient)
       listIngredient.innerHTML = ''
       arrayListIngredientUp.forEach((ingredient) => { listIngredient.innerHTML += `<div class = 'element-list list-ingredient' id=${ingredient.replaceAll(' ', '-').split('(')[0]}>${ingredient}</div>` })
     } else {
       clickDoubleI = false
+      displayIngredientsButton.className = 'fa-solid fa-angle-down fa-xl angle-position'
+      styleInput('ingredients', inputIngredients, 'close')
       listIngredient.innerHTML = ''
     }
   })
   displayAppliancesButton.addEventListener('click', () => {
     if (!clickDoubleA) {
       clickDoubleA = true
+      displayAppliancesButton.className = 'fa-solid fa-angle-up fa-xl angle-position'
+      styleInput('appliance', inputAppliances, 'open')
       const wordKey = inputAppliances.value
       const arrayListApplianceUp = listTag(wordKey, arrayListAppliance)
       listAppliance.innerHTML = ''
       arrayListApplianceUp.forEach((appliance) => { listAppliance.innerHTML += `<div class = 'element-list list-appliance'  id=${appliance.replaceAll(' ', '-').split('(')[0]}>${appliance}</div>` })
     } else {
       clickDoubleA = false
+      displayAppliancesButton.className = 'fa-solid fa-angle-down fa-xl angle-position'
+      styleInput('appliance', inputAppliances, 'close')
       listAppliance.innerHTML = ''
     }
   })
   displayUstensilsButton.addEventListener('click', () => {
     if (!clickDoubleU) {
       clickDoubleU = true
+      displayUstensilsButton.className = 'fa-solid fa-angle-up fa-xl angle-position'
+      styleInput('ustensils', inputUstensils, 'open')
       const wordKey = inputUstensils.value
       const arrayListUstensilUp = listTag(wordKey, arrayListUstensil)
       listUstensil.innerHTML = ''
       arrayListUstensilUp.forEach((ustensil) => { listUstensil.innerHTML += `<div class = 'element-list list-ustensil'  id=${ustensil.replaceAll(' ', '-').split('(')[0]}>${ustensil}<div>` })
     } else {
       clickDoubleU = false
+      displayUstensilsButton.className = 'fa-solid fa-angle-down fa-xl angle-position'
+      styleInput('ustensils', inputUstensils, 'close')
       listUstensil.innerHTML = ''
     }
   })
 
   inputIngredients.addEventListener('input', (e) => {
     const wordKey = e.target.value
+    styleInput('ingredients', inputIngredients, 'write')
     if (wordKey.length > 2) {
       const arrayListIngredientUp = listTag(wordKey, arrayListIngredient)
       listIngredient.innerHTML = ''
@@ -188,6 +207,7 @@ function displayListTag () {
 
   inputAppliances.addEventListener('input', (e) => {
     const wordKey = e.target.value
+    styleInput('appliance', inputAppliances, 'write')
     if (wordKey.length > 2) {
       const arrayListApplianceUp = listTag(wordKey, arrayListAppliance)
       listAppliance.innerHTML = ''
@@ -201,6 +221,7 @@ function displayListTag () {
 
   inputUstensils.addEventListener('input', (e) => {
     const wordKey = e.target.value
+    styleInput('ustensils', inputUstensils, 'write')
     if (wordKey.length > 2) {
       const arrayListUstensilUp = listTag(wordKey, arrayListUstensil)
       listUstensil.innerHTML = ''

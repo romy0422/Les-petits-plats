@@ -13,7 +13,7 @@ export function RecipeBuild (id, name, ingredients, time, description) {
     const timeRecipe = document.createElement('div')
 
     timeMinuteRecipe.setAttribute('class', 'head__time-preparation')
-    iconeTime.setAttribute('class', 'fa-regular fa-clock')
+    iconeTime.setAttribute('class', 'fa-regular fa-clock fa-lg')
     timeRecipe.setAttribute('class', 'time-preparation')
     bodyRecipe.setAttribute('class', 'recipe__description')
     recipes.setAttribute('id', `i-${id}`)
@@ -29,7 +29,20 @@ export function RecipeBuild (id, name, ingredients, time, description) {
     guidRecipe.textContent = description
 
     ingredients.forEach((oneIngredient) => {
-      ingredientRecipe.innerHTML += `<div class = 'ingredient'>${oneIngredient.ingredient} : ${oneIngredient.quantity} ${oneIngredient.unit}</div>`
+      let quantityFiltre = ''
+      let unitFiltre = ''
+      if (oneIngredient.quantity !== undefined) {
+        quantityFiltre = oneIngredient.quantity
+      }
+      if (oneIngredient.unit === 'grammes') {
+        unitFiltre = 'g'
+      } else if (oneIngredient.unit === 'cuillères à soupe') {
+        unitFiltre = 'cuillères'
+      } else if (oneIngredient.unit !== undefined) {
+        unitFiltre = oneIngredient.unit
+      }
+
+      ingredientRecipe.innerHTML += `<div class="container-ingredient"><div class = 'ingredient'>${oneIngredient.ingredient}</div> <p> : ${quantityFiltre} ${unitFiltre}</p></div>`
     })
     recipes.appendChild(recipesImgContain)
     recipes.appendChild(descriptionRecipes)

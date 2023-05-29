@@ -2,9 +2,7 @@ import { arrayRecipesToFilter } from './index.js'
 export let tagIdRecipeValidate = []
 
 export function searchRecipes (wordKeys, recipesArray) {
-  console.log(recipesArray)
-  const recipesFiltred = recipesArray.filter((recipe) => { return (recipe.name.toLowerCase()).includes(wordKeys.toLowerCase()) || (recipe.description.toLowerCase()).includes(wordKeys.toLowerCase()) || recipe.ingredients.includes(wordKeys) || (recipe.appliance.toLowerCase()).includes(wordKeys.toLowerCase()) || (recipe.ustensils).includes(wordKeys) })
-  console.log(recipesFiltred)
+  const recipesFiltred = recipesArray.filter((recipe) => { return (recipe.name.toLowerCase()).includes(wordKeys.toLowerCase()) || (recipe.description.toLowerCase()).includes(wordKeys.toLowerCase()) || recipe.ingredients.includes(wordKeys) })
   return recipesFiltred
 }
 
@@ -17,7 +15,7 @@ export function searchRecipesTags () {
     const tagElement = tagsSelection.querySelectorAll('.element-list')
     tagElement.forEach((tag) => {
       arrayRecipesToFilter.forEach((recipe) => {
-        if (JSON.stringify(recipe).toLowerCase().includes(tag.textContent.toLowerCase())) {
+        if (JSON.stringify(recipe.ingredients).toLowerCase().includes(tag.textContent.toLowerCase()) || JSON.stringify(recipe.appliance).toLowerCase().includes(tag.textContent.toLowerCase()) || JSON.stringify(recipe.ustensils).toLowerCase().includes(tag.textContent.toLowerCase())) {
           tagIdRecipeTrue.push(recipe.id)
         } else {
           tagIdRecipeFalse.push(recipe.id)

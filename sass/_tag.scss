@@ -1,12 +1,11 @@
 .list-tag {
-    
-  margin-top: 20px;
   display: grid;
   width: auto;
   grid-template-columns: auto auto auto;
   justify-content: start;
   gap: 2px;
   grid-auto-rows: auto;
+  height: auto;
 }
 
 .element-list {
@@ -62,16 +61,12 @@
     grid-auto-rows: auto;
     background-color: #3282F7;
 }
-#input-ingredients{
-}
-#input-appliances{
-}
-#input-ustensils{
-}
 .input-icone-group{
 
 }
 .input-tags{
+    height: 50px;
+    width: 130px;
 
 }
 .angle-position{
@@ -89,10 +84,6 @@
     grid-auto-rows: auto;
     background-color: #68D9A4;
 
-
-}
-
-.input-appliances{
 
 }
 
@@ -160,5 +151,5 @@ height:auto;
     display:flex;
     justify-content: flex-start;
     gap:10px;
-    margin: 10px 0 50px 100px;
+    margin: 10px 0 10px 95px;
 }
