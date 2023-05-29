@@ -52,6 +52,22 @@ header {
   width: 90%;
 }
 
+.message-empty {
+  color: #D04F4F;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  position: fixed;
+  width: 50%;
+  height: 300px;
+  font-size: 34px;
+  font-weight: 700;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 1;
+}
+
 .all-recipes {
   display: grid;
   width: 90%;
@@ -64,10 +80,6 @@ header {
 .recipe__article {
   width: 100%;
   margin: 20px 0 0 0;
-}
-
-.recipe__hidden {
-  display: none;
 }
 
 .head__time-preparation {

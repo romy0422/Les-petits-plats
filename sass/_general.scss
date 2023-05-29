@@ -49,3 +49,19 @@ font-size: 20px;
 .tag-selected{
 width:90%;
 }
+.message-empty{
+  color: #D04F4F;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  position: fixed;
+  width: 50%;
+  height: 300px;
+  font-size: 34px;
+  font-weight: 700;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  z-index: 1;
+
+}
