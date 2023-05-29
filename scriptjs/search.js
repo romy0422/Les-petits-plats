@@ -1,8 +1,14 @@
 import { arrayRecipesToFilter } from './index.js'
 export let tagIdRecipeValidate = []
 
+// version algorithme v2 : boucle for pour la recherche des recettes
 export function searchRecipes (wordKeys, recipesArray) {
-  const recipesFiltred = recipesArray.filter((recipe) => { return (recipe.name.toLowerCase()).includes(wordKeys.toLowerCase()) || (recipe.description.toLowerCase()).includes(wordKeys.toLowerCase()) || recipe.ingredients.includes(wordKeys) })
+  const recipesFiltred = []
+  for (let i = 0; i < recipesArray.length; i++) {
+    if (JSON.stringify(recipesArray[i].name).toLowerCase().includes(wordKeys.toLowerCase()) || JSON.stringify(recipesArray[i].description).toLowerCase().includes(wordKeys.toLowerCase()) || JSON.stringify(recipesArray[i].ingredients).toLowerCase().includes(wordKeys.toLowerCase())) {
+      recipesFiltred.push(recipesArray[i])
+    }
+  }
   return recipesFiltred
 }
 

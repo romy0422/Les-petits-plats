@@ -83,6 +83,7 @@ function interaction () {
 
 interaction()
 
+// algorithme version 2 : boucle For pour construction div des recettes visibles
 function displayRecipes () {
   const allRecipes = document.querySelector('.all-recipes')
   const arrayRecipeTagId = []
@@ -91,28 +92,32 @@ function displayRecipes () {
     arrayListIngredient = []
     arrayListAppliance = []
     arrayListUstensil = []
-    arrayRecipesToFilter.forEach((recipe) => {
-      const recipeDisplay = RecipeBuild(recipe.id, recipe.name, recipe.ingredients, recipe.time, recipe.description).recipeBuildDiv()
-      recipe.ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
-      arrayListAppliance.push(recipe.appliance)
-      arrayListUstensil.push(...recipe.ustensils)
+
+    for (let i = 0; i < arrayRecipesToFilter.length; i++) {
+      const recipeDisplay = RecipeBuild(arrayRecipesToFilter[i].id, arrayRecipesToFilter[i].name, arrayRecipesToFilter[i].ingredients, arrayRecipesToFilter[i].time, arrayRecipesToFilter[i].description).recipeBuildDiv()
+      arrayRecipesToFilter[i].ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
+      arrayListAppliance.push(arrayRecipesToFilter[i].appliance)
+      arrayListUstensil.push(...arrayRecipesToFilter[i].ustensils)
       allRecipes.appendChild(recipeDisplay)
-    })
+    }
   } else if (searchRecipesTags().length > 0) {
     arrayListIngredient = []
     arrayListAppliance = []
     arrayListUstensil = []
     allRecipes.innerHTML = ''
-    arrayRecipesToFilter.forEach((recipe) => { if (searchRecipesTags().includes(recipe.id)) { arrayRecipeTagId.push(recipe) } })
-    arrayRecipeTagId.forEach((recipe) => {
-      const { id, name, ingredients, time, description } = recipe
-      const recipeDisplay = RecipeBuild(id, name, ingredients, time, description).recipeBuildDiv()
-      recipe.ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
-      arrayListAppliance.push(recipe.appliance)
-      arrayListUstensil.push(...recipe.ustensils)
+    for (let i = 0; i < arrayRecipesToFilter.length - 1; i++) {
+      if (searchRecipesTags().includes(arrayRecipesToFilter[i].id)) {
+        arrayRecipeTagId.push(arrayRecipesToFilter[i])
+      }
+    }
+    for (let i = 0; i < arrayRecipeTagId.length; i++) {
+      console.log(arrayRecipeTagId)
+      const recipeDisplay = RecipeBuild(arrayRecipeTagId[i].id, arrayRecipeTagId[i].name, arrayRecipeTagId[i].ingredients, arrayRecipeTagId[i].time, arrayRecipeTagId[i].description).recipeBuildDiv()
+      arrayRecipeTagId[i].ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
+      arrayListAppliance.push(arrayRecipeTagId[i].appliance)
+      arrayListUstensil.push(...arrayRecipeTagId[i].ustensils)
       allRecipes.appendChild(recipeDisplay)
     }
-    )
   }
   arrayListIngredient = removeMultiple(arrayListIngredient)
   arrayListAppliance = removeMultiple(arrayListAppliance)
