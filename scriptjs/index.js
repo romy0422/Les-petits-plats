@@ -114,6 +114,11 @@ function displayRecipes () {
     }
     )
   }
+
+  if (document.querySelector('.recipe__article') === null) {
+    displayMessageEmpty(allRecipes)
+  }
+
   arrayListIngredient = removeMultiple(arrayListIngredient)
   arrayListAppliance = removeMultiple(arrayListAppliance)
   arrayListUstensil = removeMultiple(arrayListUstensil)
@@ -231,4 +236,12 @@ function displayListTag () {
       arrayListUstensil.forEach((ustensil) => { listUstensil.innerHTML += `<div class = 'element-list list-ustensil'  id=${ustensil.replaceAll(' ', '-').split('(')[0]}>${ustensil}<div>` })
     }
   })
+}
+
+function displayMessageEmpty (allRecipes) {
+  const messageEmpty = document.createElement('div')
+  messageEmpty.setAttribute('class', 'message-empty')
+  messageEmpty.textContent = 'Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc...'
+
+  allRecipes.appendChild(messageEmpty)
 }
