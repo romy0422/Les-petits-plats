@@ -1,4 +1,5 @@
-export const tagIdRecipeValidate = []
+import { arrayRecipesToFilter } from './index.js'
+export let tagIdRecipeValidate = []
 
 export function searchRecipes (wordKeys, recipesArray) {
   console.log(recipesArray)
@@ -7,15 +8,15 @@ export function searchRecipes (wordKeys, recipesArray) {
   return recipesFiltred
 }
 
-export function searchRecipesTags (recipesArray) {
+export function searchRecipesTags () {
   const tagsSelection = document.querySelector('#tag-selected')
   const tagIdRecipeTrue = []
   const tagIdRecipeFalse = []
-  let tagIdRecipeValidate = []
+  tagIdRecipeValidate = []
   if (tagsSelection.querySelector('.element-list') !== null) {
     const tagElement = tagsSelection.querySelectorAll('.element-list')
     tagElement.forEach((tag) => {
-      recipesArray.forEach((recipe) => {
+      arrayRecipesToFilter.forEach((recipe) => {
         if (JSON.stringify(recipe).toLowerCase().includes(tag.textContent.toLowerCase())) {
           tagIdRecipeTrue.push(recipe.id)
         } else {
@@ -24,12 +25,11 @@ export function searchRecipesTags (recipesArray) {
       })
     })
     tagIdRecipeValidate = tagIdRecipeTrue.filter((recipe) => !tagIdRecipeFalse.includes(recipe))
-    tagIdRecipeFalse.forEach((id) => { document.querySelector(`#i-${id}`).className = 'recipe__hidden' })
-    tagIdRecipeValidate.forEach((id) => { document.querySelector(`#i-${id}`).className = 'recipe__article' })
-  } else {
-    recipesArray.forEach((recipe) => {
-      document.querySelector(`#i-${recipe.id}`).className = 'recipe__article'
-    })
   }
   return tagIdRecipeValidate
+}
+
+export function listTag (wordKey, listTag) {
+  const list = listTag.filter((list) => { return (list.toLowerCase()).includes(wordKey.toLowerCase()) })
+  return list
 }
