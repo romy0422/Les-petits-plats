@@ -156,7 +156,7 @@ function displayListTag () {
       const wordKey = inputIngredients.value
       const arrayListIngredientUp = listTag(wordKey, arrayListIngredient)
       listIngredient.innerHTML = ''
-      arrayListIngredientUp.forEach((ingredient) => { listIngredient.innerHTML += `<div class = 'element-list list-ingredient' id=${ingredient.replaceAll(' ', '-').split('(')[0]}>${ingredient}</div>` })
+      arrayListIngredientUp.forEach((ingredient) => { listIngredient.innerHTML += `<div class = 'element-list list-ingredient' id=${ingredient.replaceAll(' ', '-').replaceAll("'", '').split('(')[0]}>${ingredient}</div>` })
     } else {
       clickDoubleI = false
       displayIngredientsButton.className = 'fa-solid fa-angle-down fa-xl angle-position'
