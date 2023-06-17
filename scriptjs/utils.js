@@ -19,7 +19,7 @@ export function removeMultiple (datas) {
   })
   return dataWithoutS
 }
-
+// gère l'apparence et le comportement de la liste des tags
 export function styleInput (type, input, state) {
   if (state === 'open') {
     input.style.opacity = '0.5'

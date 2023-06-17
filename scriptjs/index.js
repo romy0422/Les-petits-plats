@@ -3,20 +3,23 @@ import { recipes } from './data/recipes.js'
 import { removeMultiple, styleInput } from './utils.js'
 import { searchRecipes, searchRecipesTags, listTag } from './search.js'
 
-export let arrayRecipesToFilter = []
-let arrayListIngredient = []
-let arrayListAppliance = []
-let arrayListUstensil = []
+export let arrayRecipesToFilter = [] // tableau global pour les recettes filtrées
+let arrayListIngredient = [] // tableau global pour la liste ingredient
+let arrayListAppliance = [] // tableau global pour la liste appareil
+let arrayListUstensil = [] // tableau global pour la liste ustensil
 
-const tagSelected = document.querySelector('#tag-selected')
+const tagSelected = document.querySelector('#tag-selected') // selection du conteneur des tags que l'utilisateur selectionne
 
+// pour la gestion des interactions utilisateurs
 function interaction () {
-  const globalSearch = document.querySelector('#global-searchbar')
+  const globalSearch = document.querySelector('#global-searchbar') // selection de la barre de recherche globale
 
-  arrayRecipesToFilter = searchRecipes('', recipes)
-  displayRecipes()
+  arrayRecipesToFilter = searchRecipes('', recipes) // le tableau global prend la valeur des recettes filtrées
+  displayRecipes() // appel la fonction pour afficher les recettes
+
   globalSearch.addEventListener('input', (e) => {
     const wordKey = e.target.value
+    // condition autour de la longueur du mot clé pour executer la recherche
     if (wordKey.length > 3) {
       arrayRecipesToFilter = searchRecipes(wordKey, recipes)
       displayRecipes()
@@ -35,11 +38,14 @@ function interaction () {
       displayRecipes()
     }
   })
+
+  //  La gestion des tags selectionnés ainsi que pour la gestion de l'actualisation des tags disponibles dans les listes : ingredient/appareil/ustensil
   document.addEventListener('mousedown', (e) => {
+    // à chaque clique, verifie si la cible de la souris contient la class list-ingredient et que le conteneur des tags selectionnées ne contient pas l'id de la cible
     if (e.target.classList.contains('list-ingredient') && tagSelected.querySelector(`#${e.target.id}`) === null) {
-      const targetTag = e.target.id
-      const targetTagTextContent = e.target.textContent
-      tagSelected.innerHTML += `<div class = 'element-list list-ingredient fa-regular fa-circle-xmark fa-lg' id="${targetTag}"><p>${targetTagTextContent}</p></div>`
+      const targetTag = e.target.id // cree une constante de l'id du tag
+      const targetTagTextContent = e.target.textContent // cree une constante du contenu (textContent) de tag
+      tagSelected.innerHTML += `<div class = 'element-list list-ingredient fa-regular fa-circle-xmark fa-lg' id="${targetTag}"><p>${targetTagTextContent}</p></div>` // cree le tag dans le conteneur
     } else if (e.target.classList.contains('list-appliance') && tagSelected.querySelector(`#${e.target.id}`) === null) {
       const targetTag = e.target.id
       const targetTagTextContent = e.target.textContent
@@ -48,10 +54,12 @@ function interaction () {
       const targetTag = e.target.id
       const targetTagTextContent = e.target.textContent
       tagSelected.innerHTML += `<div class = 'element-list list-ustensil fa-regular fa-circle-xmark fa-lg' id="${targetTag}"><p>${targetTagTextContent}</p></div>`
-    } else if (e.target.classList.contains('list-ingredient') && tagSelected.querySelector(`#${e.target.id}`) !== null) {
-      tagSelected.removeChild(document.querySelector(`#${e.target.id}`))
-      const wordKey = globalSearch.value
-      arrayRecipesToFilter = searchRecipes(wordKey, recipes)
+    } else if (
+      // à chaque clique, verifie si la cible contient la class list-ingredient ET que l'id de l'element cliqué est déjà dans le conteneur
+      e.target.classList.contains('list-ingredient') && tagSelected.querySelector(`#${e.target.id}`) !== null) {
+      tagSelected.removeChild(document.querySelector(`#${e.target.id}`)) // efface l'id de l'element cliqué du conteneur
+      const wordKey = globalSearch.value // recupère le motclé de la recherche globale dans une constante
+      arrayRecipesToFilter = searchRecipes(wordKey, recipes) // met à jour les recettes filtrés en prenant en compte le tag absent.
       displayRecipes()
     } else if (e.target.classList.contains('list-appliance') && tagSelected.querySelector(`#${e.target.id}`) !== null) {
       tagSelected.removeChild(document.querySelector(`#${e.target.id}`))
@@ -65,15 +73,17 @@ function interaction () {
       displayRecipes()
     }
   })
+
   document.addEventListener('mousedown', (e) => {
     if (e.target.classList.contains('element-list')) {
       const wordKey = globalSearch.value
-      arrayRecipesToFilter = searchRecipes(wordKey, recipes)
+      arrayRecipesToFilter = searchRecipes(wordKey, recipes) // met à jour la liste des recettes
       displayRecipes()
 
       const inputIngredients = document.querySelector('#input-ingredients')
       const inputAppliances = document.querySelector('#input-appliances')
       const inputUstensils = document.querySelector('#input-ustensils')
+      // gerer le comportement et le style à l'affichage des listes de tags
       styleInput('ingredients', inputIngredients, 'close')
       styleInput('appliance', inputAppliances, 'close')
       styleInput('ustensils', inputUstensils, 'close')
@@ -81,25 +91,29 @@ function interaction () {
   })
 }
 
+// appel de la fonction interaction au chargement de la page
 interaction()
 
 // algorithme version 2 : boucle For pour construction div des recettes visibles
 function displayRecipes () {
-  const allRecipes = document.querySelector('.all-recipes')
-  const arrayRecipeTagId = []
+  const allRecipes = document.querySelector('.all-recipes') // conteneur mère des recettes à l'affichage
+  const arrayRecipeTagId = [] // stockera dans une constante les id des tags valides
+  // si la liste des tags selectionnés est vide
   if (searchRecipesTags().length === 0) {
     allRecipes.innerHTML = ''
     arrayListIngredient = []
     arrayListAppliance = []
     arrayListUstensil = []
-
+    // boucle directement les recettes filtrées
     for (let i = 0; i < arrayRecipesToFilter.length; i++) {
+      // construit les recettes avec la fonction factory RecipeBuild
       const recipeDisplay = RecipeBuild(arrayRecipesToFilter[i].id, arrayRecipesToFilter[i].name, arrayRecipesToFilter[i].ingredients, arrayRecipesToFilter[i].time, arrayRecipesToFilter[i].description).recipeBuildDiv()
       arrayRecipesToFilter[i].ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
       arrayListAppliance.push(arrayRecipesToFilter[i].appliance)
       arrayListUstensil.push(...arrayRecipesToFilter[i].ustensils)
       allRecipes.appendChild(recipeDisplay)
     }
+    // si la liste des tags selection est plus grand que 0
   } else if (searchRecipesTags().length > 0) {
     arrayListIngredient = []
     arrayListAppliance = []
@@ -110,8 +124,10 @@ function displayRecipes () {
         arrayRecipeTagId.push(arrayRecipesToFilter[i])
       }
     }
+    // boucle sur les ids des recettes filtrés par les tags
     for (let i = 0; i < arrayRecipeTagId.length; i++) {
       console.log(arrayRecipeTagId)
+      // construit la recette dont l'id correspond à l'id validé par la liste des tags
       const recipeDisplay = RecipeBuild(arrayRecipeTagId[i].id, arrayRecipeTagId[i].name, arrayRecipeTagId[i].ingredients, arrayRecipeTagId[i].time, arrayRecipeTagId[i].description).recipeBuildDiv()
       arrayRecipeTagId[i].ingredients.forEach((ingredientOne) => { arrayListIngredient.push(ingredientOne.ingredient) })
       arrayListAppliance.push(arrayRecipeTagId[i].appliance)
@@ -119,11 +135,11 @@ function displayRecipes () {
       allRecipes.appendChild(recipeDisplay)
     }
   }
-
+  // s'il n'existe pas de class recipe__article à l'affichage, affiche le message qui le signal
   if (document.querySelector('.recipe__article') === null) {
     displayMessageEmpty(allRecipes)
   }
-
+  // enlève les doublons et les S des listes de tags
   arrayListIngredient = removeMultiple(arrayListIngredient)
   arrayListAppliance = removeMultiple(arrayListAppliance)
   arrayListUstensil = removeMultiple(arrayListUstensil)
@@ -149,6 +165,7 @@ function displayListTag () {
   listAppliance.innerHTML = ''
   listUstensil.innerHTML = ''
 
+  // pour gerer l'ouverture et la fermeture des listes de tags au click du chevron
   let clickDoubleI = false
   let clickDoubleA = false
   let clickDoubleU = false
@@ -202,6 +219,7 @@ function displayListTag () {
     }
   })
 
+  // gère l'affichage de la liste à chaque frappe sur le clavier
   inputIngredients.addEventListener('input', (e) => {
     const wordKey = e.target.value
     styleInput('ingredients', inputIngredients, 'write')
