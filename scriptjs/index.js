@@ -20,7 +20,7 @@ function interaction () {
   globalSearch.addEventListener('input', (e) => {
     const wordKey = e.target.value
     // condition autour de la longueur du mot clé pour executer la recherche
-    if (wordKey.length > 3) {
+    if (wordKey.length >= 3) {
       arrayRecipesToFilter = searchRecipes(wordKey, recipes)
       displayRecipes()
     } else if (wordKey.length < 3) {
@@ -30,7 +30,7 @@ function interaction () {
   })
   globalSearch.addEventListener('click', () => {
     const wordKey = globalSearch.value
-    if (wordKey.length > 3) {
+    if (wordKey.length >= 3) {
       arrayRecipesToFilter = searchRecipes(wordKey, recipes)
       displayRecipes()
     } else if (wordKey.length < 3) {
